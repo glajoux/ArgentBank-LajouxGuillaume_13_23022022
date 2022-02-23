@@ -24,12 +24,18 @@ export const userFetching = () => ({ type: FETCHING });
 export const userResolved = (data) => ({ type: RESOLVED, payload: data });
 export const userRejected = (error) => ({ type: REJECTED, payload: error });
 
-export async function fetchOrUpdateUser(store) {
+export async function fetchOrUpdateUser(store, data) {
   const status = selectUsers(store.getState()).status;
   if (status === "pending" || status === "updating") {
     return;
   }
   store.dispatch(userFetching());
+  const response = await axios.post(
+    "http://localhost:3001/api/v1/user/login",
+    data
+  );
+  const resData = await response.data.body;
+  store.dispatch(userResolved(resData));
 }
 
 export default function userReducer(state = initialState, action) {
@@ -53,7 +59,8 @@ export default function userReducer(state = initialState, action) {
       }
       case RESOLVED: {
         if (draft.status === "pending ") {
-          return;
+          draft.status = "resolved";
+          draft.data = action.payload;
         }
         return;
       }
