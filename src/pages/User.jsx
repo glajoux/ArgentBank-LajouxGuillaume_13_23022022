@@ -4,17 +4,23 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 function User(props) {
-  const titleBankChecking = "Argent Bank Checking (x8349)";
-  const titleBankSavings = "Argent Bank Savings (x6712)";
-  const titleBankCreditCard = "Argent Bank Credit Card (x8349)";
+  const titleBank = {
+    checking: "Argent Bank Checking (x8349)",
+    savings: "Argent Bank Savings (x6712)",
+    creditCard: "Argent Bank Credit Card (x8349)",
+  };
 
-  const amountBankCheking = "2,082.79";
-  const amountBankSavings = "10,928.42";
-  const amountBankCreditCard = "184.30";
+  const amoutBank = {
+    checking: "2,082.79",
+    savings: "10,928.42",
+    creditCard: "184.30",
+  };
 
-  const descriptionBankChecking = "Available Balance";
-  const descriptionBankSavings = "Available Balance";
-  const descriptionBankCreditCard = "Current Balance";
+  const descriptionBank = {
+    checking: "Available Balance",
+    savings: "Available Balance",
+    creditCard: "Current Balance",
+  };
 
   return (
     <>
@@ -30,19 +36,19 @@ function User(props) {
         </div>
         <h2 className="sr-only">Accounts</h2>
         <Account
-          title={titleBankChecking}
-          amount={amountBankCheking}
-          description={descriptionBankChecking}
+          title={titleBank.checking}
+          amount={amoutBank.checking}
+          description={descriptionBank.checking}
         />
         <Account
-          title={titleBankSavings}
-          amount={amountBankSavings}
-          description={descriptionBankSavings}
+          title={titleBank.savings}
+          amount={amoutBank.savings}
+          description={descriptionBank.savings}
         />
         <Account
-          title={titleBankCreditCard}
-          amount={amountBankCreditCard}
-          description={descriptionBankCreditCard}
+          title={titleBank.creditCard}
+          amount={amoutBank.creditCard}
+          description={descriptionBank.creditCard}
         />
       </main>
       <Footer />
