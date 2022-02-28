@@ -1,9 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Account from "../components/Account";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { selectUsers } from "../redux/selectors/selectors";
 
 function User(props) {
+  const state = useSelector(selectUsers);
+  const navigate = useNavigate();
+  console.log(state);
+
   const titleBank = {
     checking: "Argent Bank Checking (x8349)",
     savings: "Argent Bank Savings (x6712)",
@@ -22,6 +29,10 @@ function User(props) {
     creditCard: "Current Balance",
   };
 
+  if (state.error !== null) {
+    navigate("/");
+  }
+
   return (
     <>
       <Header />
@@ -30,7 +41,7 @@ function User(props) {
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {`${state.data.firstName} ${state.data.lastName}`}
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>

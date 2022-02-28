@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../redux/actions/actionUser";
+import { useNavigate } from "react-router-dom";
+import { selectUsers } from "../redux/selectors/selectors";
 
 function SignInForm(props) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const selectState = useSelector((state) => state.user);
+  const state = useSelector(selectUsers);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -23,12 +27,16 @@ function SignInForm(props) {
   };
 
   const handleSubmit = (e) => {
+    console.log(state);
     const userToPost = {
       email,
       password,
     };
     e.preventDefault();
-    // dispatch fetchUsers avec userToPost en second param
+    console.log(userToPost);
+    dispatch(fetchUsers(userToPost));
+    console.log(state);
+    navigate("/user");
   };
 
   return (
@@ -36,7 +44,7 @@ function SignInForm(props) {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label for="username">Username</label>
             <input type="text" id="username" required onChange={handleChange} />
@@ -54,9 +62,7 @@ function SignInForm(props) {
             <input type="checkbox" id="remember-me" onChange={handleChange} />
             <label for="remember-me">Remember me</label>
           </div>
-          <button className="sign-in-button" onSubmit={handleSubmit}>
-            Sign In
-          </button>
+          <button className="sign-in-button">Sign In</button>
         </form>
       </section>
     </main>

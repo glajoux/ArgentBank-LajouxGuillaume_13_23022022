@@ -2,6 +2,8 @@ import {
   LOAD_USER,
   LOAD_USER_SUCCES,
   LOAD_USER_ERROR,
+  LOAD_USER_AUTHORIZE,
+  RESET_USER,
 } from "../constants/constants";
 import produce from "immer";
 
@@ -26,8 +28,13 @@ const reducerFetchUsers = (state = initialState, action) => {
       }
       case LOAD_USER_SUCCES: {
         draft.isLoading = false;
-        draft.data = action.payload; // Pas sur !!!
-        draft.token = action.payload; // Pas sur !!!
+        draft.data = action.payload;
+        draft.error = null;
+        return;
+      }
+      case LOAD_USER_AUTHORIZE: {
+        draft.isLoading = false;
+        draft.token = action.payload;
         draft.error = null;
         return;
       }
@@ -38,6 +45,10 @@ const reducerFetchUsers = (state = initialState, action) => {
         draft.error = action.payload;
         return;
       }
+      case RESET_USER: {
+        return;
+      }
+
       default:
         return;
     }
