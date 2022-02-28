@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Account from "../components/Account";
+import EditUsers from "../components/EditUsers";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { selectUsers } from "../redux/selectors/selectors";
@@ -43,7 +44,7 @@ function User(props) {
             <br />
             {`${state.data.firstName} ${state.data.lastName}`}
           </h1>
-          <button className="edit-button">Edit Name</button>
+          <EditUsers />
         </div>
         <h2 className="sr-only">Accounts</h2>
         <Account

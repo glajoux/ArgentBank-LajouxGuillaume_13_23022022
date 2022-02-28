@@ -10,7 +10,6 @@ function Header(props) {
   const dispatch = useDispatch();
 
   const logOut = () => {
-    console.log("test");
     dispatch(resetUser());
   };
 
