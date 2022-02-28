@@ -10,7 +10,6 @@ import { selectUsers } from "../redux/selectors/selectors";
 function User(props) {
   const state = useSelector(selectUsers);
   const navigate = useNavigate();
-  console.log(state);
 
   const titleBank = {
     checking: "Argent Bank Checking (x8349)",

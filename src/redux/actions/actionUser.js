@@ -31,6 +31,7 @@ export const resetUser = () => ({
 });
 
 export function fetchUsers(dataToForm) {
+  console.log(dataToForm);
   return async (dispatch) => {
     dispatch(loadUser());
     try {
@@ -63,6 +64,46 @@ export function fetchUsers(dataToForm) {
     }
   };
 }
+
+export function changeUser(body, token) {
+  return async (dispatch) => {
+    console.log(body);
+    dispatch(loadUser());
+    try {
+      const res = await axios.put(
+        "http://localhost:3001/api/v1/user/profile",
+        body,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      const responseUser = await res.data.body;
+      console.log(responseUser);
+      dispatch(loadUserSucces(responseUser));
+    } catch (error) {
+      dispatch(loadUserError(error));
+    }
+  };
+}
+
+// export const changeUser = (body, token) => {
+//   return (dispatch) => {
+//     return axios
+//       .put("http://localhost:3001/api/v1/user/profile", body, {
+//         headers: {
+//           Authorization: "Bearer " + token,
+//         },
+//       })
+//       .then((res) => {
+//         dispatch(loadUserSucces(res.data.body));
+//       })
+//       .catch((error) => {
+//         dispatch(loadUserError(error));
+//       });
+//   };
+// };
 
 // export const fetchUsers = (path, dataToForm, token) => {
 //   console.log(dataToForm);

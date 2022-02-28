@@ -1,23 +1,53 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeUser } from "../redux/actions/actionUser";
 import { selectUsers } from "../redux/selectors/selectors";
 
 function EditUsers(props) {
-  const [editProfil, setEditProfil] = useState(false);
-
   const state = useSelector(selectUsers);
+  const dispatch = useDispatch;
+
+  const [editProfil, setEditProfil] = useState(false);
+  const [firstName, setFirstName] = useState(state.data.firstName);
+  const [lastName, setLastName] = useState(state.data.lastName);
 
   const editUser = () => {
     setEditProfil(!editProfil);
   };
 
-  const putNewProfil = () => {};
+  const handleChangeName = (e) => {
+    if (e.target.id === "firstNameUser") {
+      setFirstName(e.target.value);
+    }
+    if (e.target.id === "lastNameUser") {
+      setLastName(e.target.value);
+    }
+  };
+
+  const putNewProfil = () => {
+    const body = {
+      firstName,
+      lastName,
+    };
+    const token = state.token.token;
+    dispatch(changeUser(body, token));
+  };
 
   const displayEditButton = editProfil ? (
     <div className="edit-profil">
       <div className="edit-profil-input">
-        <input type="text" placeholder={state.data.firstName} />
-        <input type="text" placeholder={state.data.lastName} />
+        <input
+          type="text"
+          id="firstNameUser"
+          placeholder={state.data.firstName}
+          onChange={handleChangeName}
+        />
+        <input
+          type="text"
+          id="lastNameUser"
+          placeholder={state.data.lastName}
+          onChange={handleChangeName}
+        />
       </div>
       <div className="edit-profil-button">
         <button
