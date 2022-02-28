@@ -9,8 +9,9 @@ function Header(props) {
   const state = useSelector(selectUsers);
   const dispatch = useDispatch();
 
-  const logOut = (e) => {
-    dispatch(resetUser);
+  const logOut = () => {
+    console.log("test");
+    dispatch(resetUser());
   };
 
   const signIn = (
@@ -28,7 +29,7 @@ function Header(props) {
         <i className="fa fa-user-circle"></i>
         {state.data.firstName}
       </NavLink>
-      <NavLink className="main-nav-item" to="/" onClick={(e) => logOut(e)}>
+      <NavLink className="main-nav-item" to="/" onClick={() => logOut()}>
         <i className="fa fa-sign-out"></i>
         Sign Out
       </NavLink>

@@ -46,7 +46,7 @@ const reducerFetchUsers = (state = initialState, action) => {
         return;
       }
       case RESET_USER: {
-        return;
+        return initialState;
       }
 
       default:
