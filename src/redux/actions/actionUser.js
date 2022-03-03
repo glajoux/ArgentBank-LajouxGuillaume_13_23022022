@@ -68,7 +68,6 @@ export function fetchUsers(dataToForm) {
 export function changeUser(body, token) {
   return async (dispatch) => {
     console.log(body);
-    dispatch(loadUser());
     try {
       const res = await axios.put(
         "http://localhost:3001/api/v1/user/profile",

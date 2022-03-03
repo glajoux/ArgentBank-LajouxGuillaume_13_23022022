@@ -35,6 +35,10 @@ function SignInForm(props) {
     e.preventDefault();
     console.log(userToPost);
     dispatch(fetchUsers(userToPost));
+    if (rememberMe) {
+      localStorage.setItem("localLogin", email);
+      localStorage.setItem("localPassword", password);
+    }
     console.log(state);
     navigate("/user");
   };

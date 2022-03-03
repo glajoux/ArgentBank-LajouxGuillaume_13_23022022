@@ -10,6 +10,8 @@ function Header(props) {
   const dispatch = useDispatch();
 
   const logOut = () => {
+    localStorage.removeItem("localLogin");
+    localStorage.removeItem("localPassword");
     dispatch(resetUser());
   };
 
