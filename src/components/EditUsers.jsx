@@ -5,7 +5,7 @@ import { selectUsers } from "../redux/selectors/selectors";
 
 function EditUsers(props) {
   const state = useSelector(selectUsers);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const [editProfil, setEditProfil] = useState(false);
   const [firstName, setFirstName] = useState(state.data.firstName);
@@ -25,12 +25,15 @@ function EditUsers(props) {
   };
 
   const putNewProfil = () => {
+    console.log(firstName);
     const body = {
       firstName,
       lastName,
     };
+    console.log();
     const token = state.token.token;
     dispatch(changeUser(body, token));
+    setEditProfil(false);
   };
 
   const displayEditButton = editProfil ? (
@@ -50,14 +53,8 @@ function EditUsers(props) {
         />
       </div>
       <div className="edit-profil-button">
-        <button
-          onClick={() => {
-            putNewProfil();
-          }}
-        >
-          Save
-        </button>
-        <button onClick={() => setEditProfil()}>Cancel</button>
+        <button onClick={() => putNewProfil()}>Save</button>
+        <button onClick={() => editUser()}>Cancel</button>
       </div>
     </div>
   ) : (

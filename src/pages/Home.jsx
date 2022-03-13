@@ -7,23 +7,6 @@ import Header from "../components/Header";
 import { fetchUsers } from "../redux/actions/actionUser";
 
 function Home(props) {
-  const email = localStorage.getItem("localLogin");
-  const password = localStorage.getItem("localPassword");
-
-  const dispatch = useDispatch();
-
-  console.log(email, password);
-
-  // Permet de vérifier si l'utilisateur est déjà enregistré
-  useEffect(() => {
-    if (email) {
-      const userToPost = {
-        email,
-        password,
-      };
-      dispatch(fetchUsers(userToPost));
-    }
-  });
   return (
     <div>
       <Header />
